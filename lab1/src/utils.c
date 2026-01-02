@@ -1,3 +1,5 @@
+// copyright
+
 #include "qemu_virt.h"
 #include "types.h"
 #include "utils.h"
@@ -43,23 +45,30 @@ void gets(char *str) {
     }
 }
 
-// Print a decimal number (0-999)
+// Print a decimal number
 void put_int(int32_t val) {
+    char buf[12];
+    int i = 0;
+    
     if (val < 0) {
         putc('-');
         val = -val;
     }
-
-    if (val >= 100) {
-        putc('0' + val / 100);
-        val %= 100;
-        putc('0' + val / 10);
-        val %= 10;
-    } else if (val >= 10) {
-        putc('0' + val / 10);
-        val %= 10;
+    
+    if (val == 0) {
+        putc('0');
+        return;
     }
-    putc('0' + val);
+    
+    while (val > 0) {
+        buf[i++] = '0' + (val % 10);
+        val /= 10;
+    }
+    
+    // Print in reverse order
+    while (i > 0) {
+        putc(buf[--i]);
+    }
 }
 
 // Read a decimal number from UART

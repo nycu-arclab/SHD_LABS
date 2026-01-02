@@ -1,52 +1,36 @@
-# compute.S - Assembly function for GDB practice
-# 
-# This function computes: 1 + 2 + 3 + ... + n
-# Students can set breakpoints here to observe registers and stack
-
 .globl compute
 
 # ============================================
-# compute: Calculate sum from 1 to n
+# compute: Calculate sum from 1 to n (recursive)
 # 
 # Input:  a0 = n
 # Output: a0 = 1 + 2 + ... + n
 # 
-# Registers used:
-#   t0 = sum (accumulator)
-#   t1 = i (counter)
-#   a0 = n (input, preserved for comparison)
+# Stack frame (8 bytes):
+#   sp+4: ra (return address)
+#   sp+0: saved n
 # ============================================
 compute:
-    # Save registers to stack
-    addi sp, sp, -16
-    sw ra, 12(sp)
-    sw s0, 8(sp)
+    beqz a0, base_case
 
-    # Initialize
-    mv s0, a0               # s0 = n (save input)
-    li t0, 0                # t0 = sum = 0
-    li t1, 1                # t1 = i = 1
+    # Allocate stack frame
+    addi sp, sp, -8
+    sw ra, 4(sp)
+    sw a0, 0(sp)
 
-compute_loop:
-    # Loop condition: if i > n, exit
-    bgt t1, s0, compute_done
+    # Recursive call: compute(n-1)
+    addi a0, a0, -1
+    jal compute
 
-    # sum += i
-    add t0, t0, t1
+    # After return: a0 = compute(n-1)
+    lw t0, 0(sp)        # Restore n into t0
+    add a0, a0, t0      # result = compute(n-1) + n
 
-    # i++
-    addi t1, t1, 1
+    # Restore and return
+    lw ra, 4(sp)
+    addi sp, sp, 8
+    ret
 
-    # Continue loop
-    j compute_loop
-
-compute_done:
-    # Return value in a0
-    mv a0, t0
-
-    # Restore registers
-    lw ra, 12(sp)
-    lw s0, 8(sp)
-    addi sp, sp, 16
-
+base_case:
+    li a0, 0            # Return 0
     ret
