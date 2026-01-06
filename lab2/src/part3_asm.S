@@ -1,5 +1,5 @@
 .global part3_start
-.global win
+.global succeed
 .global gadget_1
 .global gadget_2
 .global gadget_3
@@ -89,12 +89,12 @@ gadget_5:
     addi sp, sp, 4
     ret
 
-# win function - check if a0 == 0x5A5A5A5A
-win:
+# succeed function - check if a0 == 0x5A5A5A5A
+succeed:
     # Save a0 for later comparison
     mv t2, a0
 
-    la a0, win_msg
+    la a0, succeed_msg
     call puts
 
     la a0, a0_msg
@@ -106,7 +106,7 @@ win:
 
     # Check if a0 == 0x5A5A5A5A
     li t0, 0x5A5A5A5A
-    bne t2, t0, win_fail
+    bne t2, t0, succeed_fail
 
     la a0, correct_msg
     call puts
@@ -114,7 +114,7 @@ win:
     call puts
     j .
 
-win_fail:
+succeed_fail:
     la a0, wrong_msg
     call puts
     j .
@@ -129,8 +129,8 @@ prompt:
 ra_msg:
 .string "Returning to: 0x"
 
-win_msg:
-.string "You successfully jumped to win! Now checking a0...\r\n"
+succeed_msg:
+.string "You successfully jumped to succeed! Now checking a0...\r\n"
 
 a0_msg:
 .string "a0 = 0x"
