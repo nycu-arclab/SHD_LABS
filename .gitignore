@@ -1,1 +1,13 @@
 **/venv/
+**/build/
+*.o
+*.elf
+*.bin
+*.dump
+*.mem
+
+# Local debugger/editor files
+.gdb_history
+.vscode/
+
+/answer/

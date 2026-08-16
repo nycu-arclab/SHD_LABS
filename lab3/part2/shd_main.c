@@ -23,35 +23,3 @@ int test_main(void){
 }
 
 // ================================= TODO =================================
-
-
-// ================================= SOLUTION =================================
-
-// extern void test_opcode_asm(unsigned int opcode);
-
-// int test_main(void) {
-//     printf("Fuzzing 0x74 - 0x7F...\n");
-    
-//     for (unsigned int opcode = 0x00; opcode <= 0x7f; opcode++) {
-//         exception_triggered = 0;
-
-//         if (opcode == 0x6F || opcode == 0x63 || opcode == 0x67){
-//             continue;
-//         }
-        
-//         // test the instruction
-//         // the "exception_triggered" flag should be 1 if the opcode is invalid
-//         test_opcode_asm(opcode);
-        
-//         if (!exception_triggered) {
-//             // backdoor
-//             printf("BACKDOOR FOUND!!! opcode = 0x%x\n", opcode);
-//         } else {
-//             // printf("0x%x ok\n", opcode);
-//         }
-//     }
-    
-//     printf("Fuzzing complete!\n");
-//     return 0;
-// }
-// ================================= SOLUTION =================================

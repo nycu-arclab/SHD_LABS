@@ -19,9 +19,6 @@ task1:
 
     # ==========================TODO: Your code here==========================
 
-    # ans
-    # li a2, 0xBEEF
-
     # ========================================================================
 
     # The check_sum function reads three inputs: a, b and c
@@ -37,14 +34,6 @@ task2:
 
     # ==========================TODO: Your code here==========================
 
-    # ans
-    # addi sp, sp, -8
-    # li t0, 0x5543594E
-    # sw t0, 0(sp)
-    # sw zero, 4(sp)
-
-    # mv a0, sp
-
     # ========================================================================
 
     # The check_string function reads one input: str
@@ -52,7 +41,6 @@ task2:
     call check_string
 
     # TODO: Restore sp
-    # addi sp, sp, 8
 
     li t0, 1
     bne a0, t0, leave_part1

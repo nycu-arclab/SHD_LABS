@@ -15,16 +15,14 @@ COMMON_OBJS := build/start.o build/utils.o
 PART1_OBJS := $(COMMON_OBJS) build/part1.o build/part1_asm.o
 PART2_OBJS := $(COMMON_OBJS) build/part2.o build/part2_asm.o
 PART3_OBJS := $(COMMON_OBJS) build/part3.o build/part3_asm.o
-PART4_OBJS := $(COMMON_OBJS) build/part4.o build/part4_asm.o
 
-.PHONY: all clean part1 part2 part3 part4
+.PHONY: all clean part1 part2 part3
 
-all: part1 part2 part3 part4
+all: part1 part2 part3
 
 part1: build/part1
 part2: build/part2
 part3: build/part3
-part4: build/part4
 
 # Assembly files
 build/%.o: src/%.S
@@ -50,10 +48,6 @@ build/part2: $(PART2_OBJS) linker.ld
 build/part3: $(PART3_OBJS) linker.ld
 	@echo "  LD    $@"
 	@$(LD) $(LDFLAGS) $(PART3_OBJS) -o $@ -lgcc
-
-build/part4: $(PART4_OBJS) linker.ld
-	@echo "  LD    $@"
-	@$(LD) $(LDFLAGS) $(PART4_OBJS) -o $@ -lgcc
 
 clean:
 	rm -rf build
