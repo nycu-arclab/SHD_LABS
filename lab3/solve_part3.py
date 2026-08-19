@@ -78,7 +78,7 @@ def make_shellcode():
     # 2. Read and output CSRs 0xFC0 through 0xFC7
     #
     #    Encoding for "csrr a0, csr":
-    #      (csr << 20) | (0b010 << 12) | (10 << 7) | 0b1110011
+    #      (csr << 20) | (0b010 << 12) | (0b1010 << 7) | 0b1110011
     #
     #    Encoding for "csrw 0x004, a0":
     #      0x00451073
